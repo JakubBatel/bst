@@ -24,14 +24,13 @@ abstract class BinarySearchTreeBaseNode<E, Node extends BinarySearchTreeBaseNode
       }
       return current;
     }
-    if (isLeftChild) {
-      return parent;
+    Node? current = this as Node;
+    Node? ancestor = parent;
+    while (ancestor != null && (current?.isRightChild ?? false)) {
+      current = ancestor;
+      ancestor = ancestor.parent;
     }
-    Node? current = parent;
-    while (current != null && current.isRightChild) {
-      current = current.parent;
-    }
-    return current;
+    return ancestor;
   }
 
   Node? predecessor() {
@@ -42,14 +41,13 @@ abstract class BinarySearchTreeBaseNode<E, Node extends BinarySearchTreeBaseNode
       }
       return current;
     }
-    if (isRightChild) {
-      return parent;
+    Node? current = this as Node;
+    Node? ancestor = parent;
+    while (ancestor != null && (current?.isLeftChild ?? false)) {
+      current = ancestor;
+      ancestor = ancestor.parent;
     }
-    Node? current = parent;
-    while (current != null && current.isLeftChild) {
-      current = current.parent;
-    }
-    return current;
+    return ancestor;
   }
 
   Iterable<Node> inOrderTraversal() sync* {

@@ -25,7 +25,7 @@ abstract class BinarySearchTreeBase<E, Node extends BinarySearchTreeBaseNode<E, 
   Node? findNode(E value) {
     Node? currentNode = root;
     while (currentNode != null) {
-      final cmp = comparator(value, currentNode.value);
+      final cmp = comparator(currentNode.value, value);
       if (cmp == 0) {
         return currentNode;
       }
@@ -45,7 +45,7 @@ abstract class BinarySearchTreeBase<E, Node extends BinarySearchTreeBaseNode<E, 
 
     while (currentNode != null) {
       currentNodeParent = currentNode;
-      final cmp = comparator(value, currentNode.value);
+      final cmp = comparator(currentNode.value, value);
       if (cmp < 0) {
         currentNode = currentNode.left;
       } else if (cmp > 0) {
@@ -60,7 +60,7 @@ abstract class BinarySearchTreeBase<E, Node extends BinarySearchTreeBaseNode<E, 
     if (currentNodeParent == null) {
       root = newNode;
     } else {
-      final cmp = comparator(value, currentNodeParent.value);
+      final cmp = comparator(currentNodeParent.value, value);
       if (cmp < 0) {
         currentNodeParent.left = newNode;
       } else {
